@@ -1,0 +1,98 @@
+{
+  "name": "vscode-hugo-quick-open",
+  "displayName": "HUGO Quick Open",
+  "description": "A Visual Studio Code extension that open quickly a page on HUGO server",
+  "publisher": "chick-p",
+  "version": "0.0.1",
+  "repository": "https://github.com/chick-p/vscode-hugo-quick-open/",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.61.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:com.github.chick-p.hugo-quick-open.menu"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "com.github.chick-p.hugo-quick-open.menu",
+        "title": "HUGO Quick Open"
+      }
+    ],
+    "configuration": {
+      "title": "HUGO Quick Open",
+      "properties": {
+        "hugo-quick-open.baseUrls": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "http://localhost:1313"
+          ],
+          "description": "A list of base URLs"
+        },
+        "hugo-quick-open.browser": {
+          "type": "string",
+          "default": "chrome",
+          "enum": [
+            "chrome",
+            "firefox"
+          ],
+          "enumDescriptions": [
+            "Google Chrome",
+            "Firefox"
+          ],
+          "description": "Web browser"
+        },
+        "hugo-quick-open.isUglyUrls": {
+          "type": "boolean",
+          "default": "true",
+          "markdownDescription": "Ugly URLs. See [Ugly URLs](https://gohugo.io/content-management/urls/#ugly-urls)"
+        },
+        "hugo-quick-open.contentDir": {
+          "type": "string",
+          "default": "content",
+          "description": "The directory from where Hugo reads content files."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "yarn compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "yarn compile",
+    "lint": "run-p lint:*",
+    "lint:tsc": "tsc --noEmit",
+    "lint:prettier": "prettier --check .",
+    "lint:eslint": "eslint --ext .ts src",
+    "fix": "run-s fix:*",
+    "fix:prettier": "prettier -w .",
+    "fix:eslint": "yarn lint:eslint --fix",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.1.4",
+    "@types/mocha": "^9.0.0",
+    "@types/node": "^16.11.4",
+    "@types/vscode": "^1.61.0",
+    "@typescript-eslint/eslint-plugin": "^5.1.0",
+    "@typescript-eslint/parser": "^5.1.0",
+    "@vscode/test-electron": "^1.6.2",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "glob": "^7.1.7",
+    "mocha": "^9.1.1",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^4.4.3",
+    "prettier": "^2.4.1"
+  },
+  "dependencies": {
+    "open": "^8.4.0"
+  }
+}
